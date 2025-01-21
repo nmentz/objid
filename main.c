@@ -23,9 +23,7 @@ struct ImageData {
 /**
  * stbi_load(...) returns an unsigned char* array I named 'img_d'. This array stores the rgb data as follows...
  * img_d = [ R1, G1, B1, R2, G2, B2, R3, G3, B3, ..., Rn, Gn+1, Bn+2 ] where R = (y * image_width + x) * channels;
- * This is how stb_image wants things done and I'm not gonna fight it.
  */
-//void getRGBvec3 (int x, int y, unsigned char* img_d, int width, int channels) {
 vec3 getRGB (const int x, const int y, const struct ImageData* img_d) {
     int width = img_d->width;
     int channels = img_d->channels;
@@ -35,16 +33,14 @@ vec3 getRGB (const int x, const int y, const struct ImageData* img_d) {
         green = ((y * width + x) * channels) + 1,
         blue = ((y * width + x) * channels) + 2;
 
-    // this is kind of nice for debugging so I'll leave it
-    //printf("\npixel (%i, %i) has the rgb values respectively %i %i %i\n", x, y, image[red], image[green], image[blue]);
-
     vec3 rgbColor = {
         .r = image[red],
         .g = image[green],
         .b = image[blue]
     };
 
-    printf("\npixel (%i, %i) has the rgb values %i %i %i respectively\n", x, y, rgbColor.r, rgbColor.g, rgbColor.b);
+    // debug line
+    //printf("\npixel (%i, %i) has the rgb values %i %i %i respectively\n", x, y, rgbColor.r, rgbColor.g, rgbColor.b);
 
     return rgbColor;
 }
@@ -80,6 +76,7 @@ void RGB2csv (vec3** rgb_screen_data, const struct ImageData* img_d) {
 
     for (int x = 0; x < width; x++) {
         for (int y = 0; y < height; y++) {
+            fprintf(csv, "(%i,%i),", x, y);
             fprintf(csv, "%i,", rgb_screen_data[x][y].r);
             fprintf(csv, "%i,", rgb_screen_data[x][y].g);
             fprintf(csv, "%i,", rgb_screen_data[x][y].b);
