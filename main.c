@@ -74,9 +74,12 @@ void RGB2csv (vec3** rgb_screen_data, const struct ImageData* img_d) {
         return;
     }
 
+    // declare column headers
+    fprintf(csv, "x,y,r,g,b\n");
+
     for (int x = 0; x < width; x++) {
         for (int y = 0; y < height; y++) {
-            fprintf(csv, "(%i,%i),", x, y);
+            fprintf(csv, "%i,%i,", x, y);
             fprintf(csv, "%i,", rgb_screen_data[x][y].r);
             fprintf(csv, "%i,", rgb_screen_data[x][y].g);
             fprintf(csv, "%i,", rgb_screen_data[x][y].b);
