@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 
 
-# the points are not there! not showing up at all... too small? or not displaying color... unsure
+# https://matplotlib.org/stable/gallery/mplot3d/index.html
+# desmos has a javascript api so that may be a better option
+
 
 import pandas as pd
 import matplotlib.pyplot as plt
